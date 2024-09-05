@@ -2,6 +2,9 @@
 
 pipeline {
     agent any
+    tools {
+        gradle 'gradle'
+    }
     environment {
         ECR_REPO_URL = '330673547330.dkr.ecr.eu-central-1.amazonaws.com'
         IMAGE_REPO = "${ECR_REPO_URL}/java-app"
