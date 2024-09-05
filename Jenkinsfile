@@ -3,7 +3,7 @@
 pipeline {
     agent any
     tools {
-        gradle 'gradle'
+        gradle 'Gradle'
     }
     environment {
         ECR_REPO_URL = '330673547330.dkr.ecr.eu-central-1.amazonaws.com'
