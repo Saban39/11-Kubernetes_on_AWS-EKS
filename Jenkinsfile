@@ -2,12 +2,15 @@
 
 pipeline {
     agent any
+    tools {
+        gradle 'Gradle'
+    }
     environment {
-        ECR_REPO_URL = '{your-aws-id}.dkr.ecr.eu-west-3.amazonaws.com'
+        ECR_REPO_URL = '{your-aws-id}.dkr.ecr.eu-central-1.amazonaws.com'
         IMAGE_REPO = "${ECR_REPO_URL}/java-app"
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
         CLUSTER_NAME = "my-cluster"
-        CLUSTER_REGION = "eu-west-3"
+        CLUSTER_REGION = "{your-aws-region}"
         AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
     }
@@ -16,7 +19,7 @@ pipeline {
             steps {
                script {
                    echo "building the application..."
-                   sh './gradlew clean build'
+                   sh 'gradle clean build'
                }
             }
         }
