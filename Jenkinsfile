@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
         ECR_REPO_URL = '524196012679.dkr.ecr.eu-central-1.amazonaws.com/sg1905'
-        IMAGE_REPO = "${ECR_REPO_URL}/java-app"
+        IMAGE_REPO = "${ECR_REPO_URL}"
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
         CLUSTER_NAME = "my-cluster"
         CLUSTER_REGION = "eu-central-1"
