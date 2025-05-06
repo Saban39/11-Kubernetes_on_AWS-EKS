@@ -26,7 +26,7 @@ pipeline {
                }
             }
         }
-        stages {
+        
         stage('Get ECR Login Password') {
             steps {
                 script {
