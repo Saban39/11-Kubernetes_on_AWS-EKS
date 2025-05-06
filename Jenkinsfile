@@ -26,14 +26,29 @@ pipeline {
                }
             }
         }
+        stage('Get ECR Login Password') {
+            steps {
+                script {
+                    // Get the login password and store it in a variable
+                    env.ECR_PASSWORD = sh(script: "aws ecr get-login-password --region $ECR_REGION", returnStdout: true).trim()
+                }
+            }
+        }
+
+        stage('Docker Login to ECR') {
+            steps {
+                script {
+                    // Login to Docker using the password
+                    sh "echo $ECR_PASSWORD | docker login --username AWS --password-stdin $ECR_REPO_URL"
+                }
+            }
+        }
         stage('build image') {
             steps {
                 script {
                     echo "building the docker image..."
                     sh "docker build -t ${IMAGE_REPO}:${IMAGE_NAME} ."
-                    sh '''
-aws ecr get-login-password --region $ECR_REGION | docker login --username AWS --password-stdin $ECR_REPO_URL
-'''
+                   
 
                     sh "docker push ${IMAGE_REPO}:${IMAGE_NAME}"
                 }
