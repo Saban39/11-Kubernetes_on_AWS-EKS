@@ -84,18 +84,29 @@ pipeline {
             }
             steps {
                 script {
-                    sh "aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${CLUSTER_REGION}"
+    // Define a kubeconfig path within the Jenkins workspace
+    def kubeconfigPath = "${env.WORKSPACE}/.kube/config"
 
-                    env.DB_USER = sh(script: 'echo -n $DB_USER_SECRET | base64', returnStdout: true).trim()
-                    env.DB_PASS = sh(script: 'echo -n $DB_PASS_SECRET | base64', returnStdout: true).trim()
-                    env.DB_NAME = sh(script: 'echo -n $DB_NAME_SECRET | base64', returnStdout: true).trim()
-                    env.DB_ROOT_PASS = sh(script: 'echo -n $DB_ROOT_PASS_SECRET | base64', returnStdout: true).trim()
-                    
-                    echo 'deploying new release to EKS...'
-                    sh 'envsubst < k8s-deployment/java-app-cicd.yaml | kubectl apply -f -'
-                    sh 'envsubst < k8s-deployment/db-config-cicd.yaml | kubectl apply -f -'
-                    sh 'envsubst < k8s-deployment/db-secret-cicd.yaml | kubectl apply -f -'
-                }
+    // Ensure directory exists
+    sh "mkdir -p ${env.WORKSPACE}/.kube"
+
+    // Update kubeconfig with explicit path
+    sh "aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${CLUSTER_REGION} --kubeconfig ${kubeconfigPath}"
+
+    // Export secrets as base64 values
+    env.DB_USER = sh(script: 'echo -n $DB_USER_SECRET | base64', returnStdout: true).trim()
+    env.DB_PASS = sh(script: 'echo -n $DB_PASS_SECRET | base64', returnStdout: true).trim()
+    env.DB_NAME = sh(script: 'echo -n $DB_NAME_SECRET | base64', returnStdout: true).trim()
+    env.DB_ROOT_PASS = sh(script: 'echo -n $DB_ROOT_PASS_SECRET | base64', returnStdout: true).trim()
+
+    echo 'deploying new release to EKS...'
+
+    // Run kubectl commands using the correct kubeconfig
+    sh "KUBECONFIG=${kubeconfigPath} envsubst < k8s-deployment/java-app-cicd.yaml | kubectl apply -f -"
+    sh "KUBECONFIG=${kubeconfigPath} envsubst < k8s-deployment/db-config-cicd.yaml | kubectl apply -f -"
+    sh "KUBECONFIG=${kubeconfigPath} envsubst < k8s-deployment/db-secret-cicd.yaml | kubectl apply -f -"
+}
+
             }
         }
     }
