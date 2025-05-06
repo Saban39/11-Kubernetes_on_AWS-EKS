@@ -20,7 +20,7 @@ pipeline {
             steps {
                script {
                    echo "building the application..."
-                   /bin/sh 'gradle clean build'
+                   sh 'gradle clean build'
                }
             }
         }
