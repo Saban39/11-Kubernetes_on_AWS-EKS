@@ -1,3 +1,7 @@
+# Ignore all README files in all folders
+**/README*
+# Ignore all README files in all folders
+**/README.MD
 .idea
 build
 out
