@@ -6,12 +6,12 @@ pipeline {
         gradle 'Gradle'
     }
     environment {
-        ECR_REPO_URL = '524196012679.dkr.ecr.us-east-1.amazonaws.com/sg1905'
+        ECR_REPO_URL = '524196012679.dkr.ecr.eu-central-1.amazonaws.com/sg1905'
         IMAGE_REPO = "${ECR_REPO_URL}/java-app"
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
         CLUSTER_NAME = "my-cluster"
         CLUSTER_REGION = "eu-central-1"
-        ECR_REGION = "us-east-1"
+        
         AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
         PATH = "/Users/sgworker/.docker/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -32,11 +32,11 @@ pipeline {
                 script {
                     try {
                         // Print environment variables for debugging purposes
-                        echo "ECR Region: $ECR_REGION"
+                        echo "ECR Region: $CLUSTER_REGION"
                         echo "ECR Repo URL: $ECR_REPO_URL"
 
                         // Run the AWS CLI command to get the login password
-                        def password = sh(script: "aws ecr get-login-password --region $ECR_REGION", returnStdout: true).trim()
+                        def password = sh(script: "aws ecr get-login-password --region $CLUSTER_REGION", returnStdout: true).trim()
 
                         // Store the password in the environment variable
                         env.ECR_PASSWORD = password
