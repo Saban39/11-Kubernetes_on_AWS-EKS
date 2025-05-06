@@ -26,11 +26,30 @@ pipeline {
                }
             }
         }
+        stages {
         stage('Get ECR Login Password') {
             steps {
                 script {
-                    // Get the login password and store it in a variable
-                    env.ECR_PASSWORD = sh(script: "aws ecr get-login-password --region $ECR_REGION", returnStdout: true).trim()
+                    try {
+                        // Print environment variables for debugging purposes
+                        echo "ECR Region: $ECR_REGION"
+                        echo "ECR Repo URL: $ECR_REPO_URL"
+
+                        // Run the AWS CLI command to get the login password
+                        def password = sh(script: "aws ecr get-login-password --region $ECR_REGION", returnStdout: true).trim()
+
+                        // Store the password in the environment variable
+                        env.ECR_PASSWORD = password
+
+                        // Print the obtained password (avoid printing the actual password in production)
+                        echo "Successfully retrieved the ECR login password (printing only the length for debugging purposes): ${password.length()}"
+
+                    } catch (Exception e) {
+                        // Catch any errors and print them to help with debugging
+                        echo "Error during ECR password retrieval: ${e.getMessage()}"
+                        currentBuild.result = 'FAILURE'
+                        throw e
+                    }
                 }
             }
         }
