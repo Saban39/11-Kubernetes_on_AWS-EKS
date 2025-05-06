@@ -11,6 +11,7 @@ pipeline {
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
         CLUSTER_NAME = "my-cluster"
         CLUSTER_REGION = "eu-central-1"
+        ECR_REGION = "us-east-1"
         AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
         PATH = "/Users/sgworker/.docker/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -30,7 +31,7 @@ pipeline {
                 script {
                     echo "building the docker image..."
                     sh "docker build -t ${IMAGE_REPO}:${IMAGE_NAME} ."
-                    sh "aws ecr get-login-password --region ${CLUSTER_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URL}"
+                    sh "aws ecr get-login-password --region ${ECR_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URL}"
                     sh "docker push ${IMAGE_REPO}:${IMAGE_NAME}"
                 }
             }
