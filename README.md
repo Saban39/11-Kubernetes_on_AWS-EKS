@@ -3,6 +3,8 @@
 
 ## 📄 Included PDF Resources
 
+CAPSTONE PROJECT-1
+
 - [11-Kubernetes_on_AWS-EKS.pdf](./11-Kubernetes_on_AWS-EKS.pdf): Contains my notes, solutions, and test results related to Kubernetes on AWS EKS.
 
 [📂 View exercises documentation as markdown for AWS EKS (Branch 11_bce_aws_eks)](https://github.com/Saban39/DevOps_Bootcamp_Exercises/tree/11_bce_aws_eks)
