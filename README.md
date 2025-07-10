@@ -1,3 +1,4 @@
+# 11 - Kubernetes on AWS - EKS
 #### This project is for the Devops Bootcamp module "Kubernetes on AWS - EKS" 
 
 I created a fully automated CI/CD pipeline to deploy a Java application on an Amazon EKS (Elastic Kubernetes Service) cluster.
@@ -19,7 +20,7 @@ All of my notes, work, solutions, and test results can be found in the PDF 11-Ku
 My complete documentation, including all notes and tests from the bootcamp, is available in this repository: https://github.com/Saban39/my_devops-bootcamp-pdf-notes-and-solutions.git
 
 
-# 11 - Kubernetes on AWS - EKS
+
 ## My notes, work, solutions, and test results for Module "Kubernetes on AWS"
 
 
