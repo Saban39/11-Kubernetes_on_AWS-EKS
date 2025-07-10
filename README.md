@@ -13,6 +13,9 @@ This way, any code changes automatically triggered the pipeline and deployed the
 
 CAPSTONE PROJECT-1
 
+Evidence / Proof
+Here are my notes, work, solutions, and test results for the module "Configuration Management with Ansible":
+👉 PDF Link to Module Notes & Work
 - [11-Kubernetes_on_AWS-EKS.pdf](./11-Kubernetes_on_AWS-EKS.pdf): Contains my notes, solutions, and test results related to Kubernetes on AWS EKS.
 
 
