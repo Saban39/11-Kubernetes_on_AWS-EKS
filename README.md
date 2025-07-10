@@ -14,7 +14,7 @@ All of my notes, work, solutions, and test results can be found in the PDF 11-Ku
 
 
 # 11 - Kubernetes on AWS - EKS
-## Exercises for Module "Kubernetes on AWS"
+## My notes, work, solutions, and test results for Module "Kubernetes on AWS"
 
 
 
