@@ -1,3 +1,5 @@
+## Capstone Project 1: Complete CI/CD Pipeline with EKS and AWS ECR
+
 # 11 - Kubernetes on AWS - EKS
 #### This project is for the Devops Bootcamp module "Kubernetes on AWS - EKS" 
 
