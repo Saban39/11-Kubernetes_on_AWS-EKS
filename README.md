@@ -1,5 +1,15 @@
 ## Capstone Project 1: Complete CI/CD Pipeline with EKS and AWS ECR
 
+### What did you build? 
+I created a fully automated CI/CD pipeline to deploy a Java application on an Amazon EKS (Elastic Kubernetes Service) cluster.
+
+### What have you learned? 
+Through this project, I learned how to provision an EKS cluster using eksctl,  how to manage Docker images using both Docker Hub and Amazon ECR. I also gained hands-on experience in configuring Jenkins pipelines and writing a Jenkinsfile to automate the build, test, and deployment processes.
+
+### Please describe the project. 
+First, I used eksctl to create an EKS cluster on AWS. Then, I built a Docker image of my Java application and initially tested the deployment using Docker Hub. Later, I pushed the image to an Amazon ECR repository. After setting up Jenkins, I wrote a Jenkinsfile to automate the entire CI/CD process — including building the image, pushing it to ECR, and deploying it to the EKS cluster. This way, any code changes automatically triggered the pipeline and deployed the updated application.
+
+
 # 11 - Kubernetes on AWS - EKS
 #### This project is for the Devops Bootcamp module "Kubernetes on AWS - EKS" 
 
